@@ -610,7 +610,7 @@ def recommend_popularity():
           d.d_name,
           d.age_limit,
           d.remain_num,
-          ROUND(AVG(r.rating), 1) AS avg_rating
+          AVG(r.rating) AS avg_rating
         FROM `DVD` d
         LEFT JOIN `Rating` r ON d.d_id = r.d_id
         WHERE d.age_limit <= %s
@@ -651,7 +651,7 @@ def recommend_popularity():
     print('id title director age_limit avg.rating stock')
     print('--------------------------------------------------------------------------------')
     d_id, d_title, d_name, age_limit, remain_num, avg_rating = rating_rec
-    print(f'{d_id} {d_title} {d_name} {age_limit} {avg_rating} {remain_num}')
+    print(f'{d_id} {d_title} {d_name} {age_limit} {round(avg_rating,1)} {remain_num}')
     print('--------------------------------------------------------------------------------')
 
     print('Popularity-based')
